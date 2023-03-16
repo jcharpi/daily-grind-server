@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import fetch from 'node-fetch';
+import functions from 'firebase-functions'
 
 const app = express();
 const port = 3000;
@@ -34,6 +35,9 @@ app.get('/location', async (req, res) => {
     res.status(500).send('Internal server error');
   }
 });
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
-});
+
+exports.app = functions.https.onRequest(app);
+
+// app.listen(port, () => {
+//   console.log(`App listening at http://localhost:${port}`);
+// });
