@@ -12,7 +12,7 @@
   "engines": {
     "node": "16"
   },
-  "main": "../App.js",
+  "main": "../App.cjs",
   "dependencies": {
     "firebase-admin": "^11.5.0",
     "firebase-functions": "^4.2.0"
