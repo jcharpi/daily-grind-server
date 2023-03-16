@@ -5,8 +5,14 @@ import fetch from 'node-fetch';
 const app = express();
 const port = 3000;
 
+const allowedOrigins = [
+  'https://jcharpi.github.io',
+  'http://localhost:3001'
+];
 // Enable CORS for all routes
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigins
+}));
 
 app.get('/location', async (req, res) => {
   try {
