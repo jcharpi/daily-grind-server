@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import fetch from 'node-fetch';
-import functions from 'firebase-functions'
+const functions = require("firebase-functions");
 
 const app = express();
 const port = 3000;
