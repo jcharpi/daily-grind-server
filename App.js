@@ -1,19 +1,12 @@
-const express = require("express");
-const cors = require("cors");
-const fetch = require("node-fetch");
-const functions = require("firebase-functions");
+import express from 'express';
+import cors from 'cors';
+import fetch from 'node-fetch';
 
 const app = express();
 const port = 3000;
 
-const allowedOrigins = [
-  'https://jcharpi.github.io',
-  'http://localhost:3001'
-];
 // Enable CORS for all routes
-app.use(cors({
-  origin: allowedOrigins
-}));
+app.use(cors());
 
 app.get('/location', async (req, res) => {
   try {
@@ -35,9 +28,6 @@ app.get('/location', async (req, res) => {
     res.status(500).send('Internal server error');
   }
 });
-
-exports.app = functions.https.onRequest(app);
-
-// app.listen(port, () => {
-//   console.log(`App listening at http://localhost:${port}`);
-// });
+app.listen(port, () => {
+  console.log(`App listening at http://localhost:${port}`);
+});
