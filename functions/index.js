@@ -1,22 +1,23 @@
-import express from "express";
-import cors from "cors";
-import fetch from "node-fetch";
+const functions = require("firebase-functions");
+const express = require("express");
+const cors = require("cors");
+const fetch = require("node-fetch");
 
 const app = express();
-const port = 3000;
 
 // Enable CORS for all routes
 app.use(cors());
 
 app.get("/location", async (req, res) => {
   try {
-    const location = req.query.location
-    const radius = req.query.radius
+    const location = req.query.location;
+    const radius = req.query.radius;
     const apiKey = functions.config().google_maps.key;
+
     const response = await fetch(
-      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location}&radius=${radius}&type=cafe&key=${apiKey}`
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location}&radius=${radius}&type=cafe&key=${apiKey}`,
     );
-    
+
     if (!response.ok) {
       throw new Error("Failed to fetch directions from Google");
     }
@@ -29,6 +30,5 @@ app.get("/location", async (req, res) => {
     res.status(500).send("Internal server error");
   }
 });
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
-});
+
+exports.app = functions.https.onRequest(app);
