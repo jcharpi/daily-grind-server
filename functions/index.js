@@ -6,7 +6,7 @@ const fetch = require("node-fetch");
 const app = express();
 
 const corsOptions = {
-  origin: "https://jcharpi.github.io/daily-grind/",
+  origin: "*",
   optionsSuccessStatus: 200,
 };
 
@@ -28,7 +28,6 @@ app.get("/location", async (req, res) => {
 
     const data = await response.json();
 
-    res.set("Access-Control-Allow-Origin", "*");
     res.json(data);
   } catch (error) {
     console.error(error);
