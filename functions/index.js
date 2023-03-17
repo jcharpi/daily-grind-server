@@ -5,8 +5,12 @@ const fetch = require("node-fetch");
 
 const app = express();
 
-// Enable CORS for all routes
-app.use(cors());
+const corsOptions = {
+  origin: "https://jcharpi.github.io/daily-grind/",
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 app.get("/location", async (req, res) => {
   try {
@@ -24,6 +28,7 @@ app.get("/location", async (req, res) => {
 
     const data = await response.json();
 
+    res.set("Access-Control-Allow-Origin", "*");
     res.json(data);
   } catch (error) {
     console.error(error);
