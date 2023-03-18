@@ -12,12 +12,14 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+const apiKey = functions.config().google_maps.api_key;
+
 app.get("/location", async (req, res) => {
   try {
     const location = req.query.location;
     const radius = req.query.radius;
     const response = await fetch(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location}&radius=${radius}&type=cafe&key=AIzaSyDzor3AfBqVGEEtLnHBCnwwGJ_4uRMHEJc`,
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location}&radius=${radius}&type=cafe&key=${apiKey}`,
     );
 
     if (!response.ok) {
